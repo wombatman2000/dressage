@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /meutes/{meute} {
+      allow get, create, update: if meute.size() >= 20;
+      match /essais/{essai} {
+        allow read, create, update: if meute.size() >= 20;
+      }
+    }
+  }
+}
